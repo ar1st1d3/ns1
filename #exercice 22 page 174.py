@@ -18,76 +18,67 @@ def entree():
     
     return nombre
 
+def add(bin1, bin2):
+
+    resultat = [0]*8
+    somme = 0
+    retenu = 0
+
+    for i in range(7, 0, -1):
+        somme = bin1[i] + bin2[i] + retenu
+        if somme == 1 :
+            resultat[i] = 1
+            retenu = 0  
+        elif somme == 0 :
+            resultat[i] = 0
+            retenu = 0
+        elif somme == 2 :
+            resultat[i] = 0
+            retenu = 1
+        else :
+            retenu = 1
+            resultat[i] = 1
+    if retenu == 1 and bin1[0] == bin2[0] == 0 : 
+        print("Il y a un dépassement. Ce calcul ne peut pas etre effectué avec ces deux nombres")
+    else :
+        return resultat
+
+def inversion(n) : 
+    print(n)
+    n_inversé = [0]*8
+    for i in range(8):
+        if n[i] == 0 :
+            n_inversé[i] = 1
+    un = [0,0,0,0,0,0,0,1]
+    print(n_inversé)
+    n_inversé = add(n_inversé, un)
+    print(n_inversé)
+    return n_inversé
+
 def binaire(n):
 
     n_binaire = [0]*8
-    if n < 0 : 
-        n_binaire[0] = 1
-    n = abs(n)
-    for i in range(1, 7):
-        n_binaire[abs(i - 8)] = n%2
-        n = n//2 
+
+    N = abs(n)
+    for i in range(1, 8):
+        n_binaire[abs(i - 8)] = N%2
+        N = N//2 
+    if n < 0 :
+        n_binaire = inversion(n_binaire)
+        print(n_binaire)
     return n_binaire
 
-def add(n1, n2):
-    print(f'La somme des nombres {n1} et {n2} est égale à {n1 + n2}')
-    bin1 = binaire(n1)
-    bin2 = binaire(n2)
-    somme = [0] * 8
-    retenu = 0
-    for i in range(7): 
-        j = abs(i - 7)
-        addition = bin1[j] + bin2[j] + retenu
-        if addition == 2: 
-            somme[j] = 0
-            retenu = 1
-        elif addition == 3:
-            somme[j] = 1
-            retenu = 1
-        else: 
-            somme[j] = addition
-            retenu = 0
-
-    if retenu == 1: 
-        print('Erreur : il y a un dépassement lors cette operation avec ces deux nombres')
-
-    print('La somme de ces deux nombres en base 2 est de', somme)
-
-def sub(n1, n2):
-    print(f'La différence des nombres {n1} et {n2} est égale à {n1 - n2}')
-    bin1 = binaire(n1)
-    bin2 = binaire(n2)
-    difference = [0] * 8
-    retenue = 0
-
-    for i in range(7): 
-        j = abs(i - 7)
-        soustraction = bin1[j] - bin2[j] - retenue
-        if soustraction == -1: 
-            difference[j] = 1
-            retenue = 1
-        elif soustraction == -2:
-            difference[j] = 0
-            retenue = 1
-        else: 
-            difference[j] = soustraction
-            retenue = 0
-
-    if retenue == 1: 
-        print('Erreur : il y a un dépassement lors de la soustraction de ces deux nombres')
-
-    print('La différence de ces deux nombres en base 2 est de', difference)
 
 
 
 def main(): 
 
     n1, n2 = entree()
-    bin1 =  int(''.join(map(str, binaire(n1)))) 
-    print(f'{bin1 = }')
-    bin2 =  int(''.join(map(str, binaire(n2)))) 
-    print(f'{bin2 = }')
-    add(n1, n2)
-    sub(n1, n2)
+    bin1 =  binaire(n1)
+    print(f'votre nombre 1 en binaire vaut {"".join(map(str, bin1))}')
+    bin2 =  binaire(n2)
+    print(f'votre nombre 2 en binaire vaut {"".join(map(str, bin2))}')
+    if add(bin1, bin2) != None :
+        print(f'la somme des deux nombres est {add(bin1, bin2)}(en binaire) et vaut à (en decimal   )')
 
 main()
