@@ -40,19 +40,35 @@ def add(bin1, bin2):
             resultat[i] = 1
     if retenu == 1 and bin1[0] == bin2[0] == 0 : 
         print("Il y a un dépassement. Ce calcul ne peut pas etre effectué avec ces deux nombres")
+    elif bin1[0] != bin2[0] :
+        somme = bin1[0] + bin2[0] + retenu
+        if somme == 1 :     
+            resultat[0] = 1
+            retenu = 0  
+        elif somme == 0 :
+            resultat[0] = 0
+            retenu = 0
+        elif somme == 2 :
+            resultat[0] = 0
+            retenu = 1
+        else :
+            retenu = 1
+            resultat[0] = 1
+        return resultat
+    elif retenu == 0 and bin1[0] == bin2[0] == 1 : 
+        print("Il y a un dépassement. Ce calcul ne peut pas etre effectué avec ces deux nombres")
     else :
         return resultat
 
 def inversion(n) : 
-    print(n)
     n_inversé = [0]*8
     for i in range(8):
         if n[i] == 0 :
             n_inversé[i] = 1
     un = [0,0,0,0,0,0,0,1]
-    print(n_inversé)
     n_inversé = add(n_inversé, un)
-    print(n_inversé)
+    if n[0] == 0 : 
+        n_inversé[0] = 1
     return n_inversé
 
 def binaire(n):
@@ -65,20 +81,41 @@ def binaire(n):
         N = N//2 
     if n < 0 :
         n_binaire = inversion(n_binaire)
-        print(n_binaire)
     return n_binaire
 
-
-
+def decimal(n) : 
+    dec = ""
+    n_dec = 0
+    if n[0] == 1 : 
+        dec = "-"
+        n = inversion(n)
+    for i in range(7, 0, -1) :
+        n_dec += n[i] * 2**(abs(i - 7))
+    dec = dec + str(n_dec)
+    return dec
 
 def main(): 
 
+    print("----- SAISIE -----")
     n1, n2 = entree()
     bin1 =  binaire(n1)
     print(f'votre nombre 1 en binaire vaut {"".join(map(str, bin1))}')
     bin2 =  binaire(n2)
     print(f'votre nombre 2 en binaire vaut {"".join(map(str, bin2))}')
+    print("---- ADDITION ----")
     if add(bin1, bin2) != None :
-        print(f'la somme des deux nombres est {add(bin1, bin2)}(en binaire) et vaut à (en decimal   )')
+        resultat = add(bin1, bin2)
+        print(f'la somme des deux nombres est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)')
+    print("-- SOUSTRACTION --")
+    print("n1 - n2 : ")
+    if add(bin1, inversion(bin2)) != None :
+        resultat = add(bin1, inversion(bin2))
+        print(f"La difference du nombre 1 et du nombre 2 est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+    print("n2 - n1 :")
+    if add(bin2, inversion(bin1)) != None :
+        resultat = add(bin2, inversion(bin1))
+        print(f"La difference du nombre 1 et du nombre 2 est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+    
 
 main()
+ 
