@@ -57,6 +57,9 @@ def add(bin1, bin2):
         return resultat
     elif retenu == 0 and bin1[0] == bin2[0] == 1 : 
         print("Il y a un dépassement. Ce calcul ne peut pas etre effectué avec ces deux nombres")
+    elif bin1[0] == bin2[0] == 1 :
+        resultat[0] = 1
+        return resultat
     else :
         return resultat
 
@@ -109,13 +112,18 @@ def main():
     print("-- SOUSTRACTION --")
     print("n1 - n2 : ")
     if add(bin1, inversion(bin2)) != None :
+        print(inversion(bin2))
+        print(bin1)
         resultat = add(bin1, inversion(bin2))
-        print(f"La difference du nombre 1 et du nombre 2 est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+        print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
     print("n2 - n1 :")
     if add(bin2, inversion(bin1)) != None :
         resultat = add(bin2, inversion(bin1))
-        print(f"La difference du nombre 1 et du nombre 2 est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
-    
+        print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+    print("==================")
+    print("====== FIN! ======")    
+    print("==================")
+
 
 main()
  
