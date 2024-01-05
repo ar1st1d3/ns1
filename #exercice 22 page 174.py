@@ -106,20 +106,25 @@ def main():
     bin2 =  binaire(n2)
     print(f'votre nombre 2 en binaire vaut {"".join(map(str, bin2))}')
     print("---- ADDITION ----")
-    if add(bin1, bin2) != None :
+    if add(bin1, bin2) is not None :
         resultat = add(bin1, bin2)
         print(f'la somme des deux nombres est {"".join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)')
     print("-- SOUSTRACTION --")
     print("n1 - n2 : ")
-    if add(bin1, inversion(bin2)) != None :
-        print(inversion(bin2))
-        print(bin1)
+    if add(bin1, inversion(bin2)) is not None :
         resultat = add(bin1, inversion(bin2))
-        print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
-    print("n2 - n1 :")
-    if add(bin2, inversion(bin1)) != None :
+        if resultat == [1, 0, 0, 0, 0, 0, 0, 0] :
+            print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à -128 (en decimal)")
+        else :
+            print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+    print("n2 - n1 : ")
+    if add(bin2, inversion(bin1)) is not None :
         resultat = add(bin2, inversion(bin1))
-        print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+        if resultat == [1, 0, 0, 0, 0, 0, 0, 0] :
+            print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à -128 (en decimal)")
+        else :
+            print(f"La difference du nombre 1 et du nombre 2 est {''.join(map(str, resultat))} (en binaire) et vaut à {decimal(resultat)} (en decimal)")
+
     print("==================")
     print("====== FIN! ======")    
     print("==================")
