@@ -1,0 +1,12 @@
+I - recherche par dichotomie : Le principe 
+
+1. Pour ce tableau il suffit de 3 tour pour trouver la valeur si elle se trouve dans le tableau. Pour un tableau de 1 il suffit juste d'un acces alors que pour un tableau de 2 et de 3 il faut 2 tours 
+
+2. Nous ne pouvons pas remplacer // par / car cela nous donnerai des nombres à virgule. cela ne change rien si on met un arrondit superieur
+
+3. Le Programme se finira toujours et ne renvera jamais une erreur.  Cependant il peut ne pas trouver la valeur meme si elle est presente dans le tableau et renverai -1 si il ne le trouve pas
+
+II - Mesurer la complexité dans le pire des cas 
+
+1. La recherche lineaire à une complexité lineaire qui augmente le temps du code proportionel à la taille du tableau au contraire de la recherche dichotomique qui a plus une complexité logarithmique ce qui donne un temps trés bas pour tous les
+test utilisé
